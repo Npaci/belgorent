@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/belgorent?useSSL=false
+    username: COURSDB
+    password: COURSDB
+  jpa:
+    show-sql: true
