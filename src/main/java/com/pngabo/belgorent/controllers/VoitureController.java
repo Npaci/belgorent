@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/voiture")
@@ -15,6 +16,11 @@ public class VoitureController {
 
     public VoitureController(VoitureServiceImpl service) {
         this.service = service;
+    }
+
+    @GetMapping(path = {"", "/", "/all"})
+    public List<VoitureDTO> getAll() {
+        return service.getAll();
     }
 
     @GetMapping("/{id}")

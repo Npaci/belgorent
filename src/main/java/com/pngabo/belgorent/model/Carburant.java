@@ -1,7 +1,7 @@
 package com.pngabo.belgorent.model;
 
 public enum Carburant {
-    DIESEL("Diesell"),
+    DIESEL("Diesel"),
     ESSENCE("Essence"),
     LPG("LPG");
 

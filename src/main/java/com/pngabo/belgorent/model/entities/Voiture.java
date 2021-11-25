@@ -4,6 +4,8 @@ import com.pngabo.belgorent.model.Carburant;
 import com.pngabo.belgorent.model.EtatVoiture;
 import com.pngabo.belgorent.model.TypeVoiture;
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,17 +31,18 @@ public class Voiture {
     @Enumerated(EnumType.STRING)
     private EtatVoiture etat;
 
-    @OneToMany(mappedBy = "voiture")
+    @OneToMany(mappedBy = "voiture", fetch = FetchType.EAGER)
     private List<Location> listLocations;
 
     @ManyToOne
     @JoinColumn(name = "modele_id")
     private Modele modele;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     @JoinTable(name = "Voiture_Option",
             joinColumns = @JoinColumn(name = "voiture_id"),
             inverseJoinColumns = @JoinColumn(name = "option_id")
     )
-    private List<Option> listOptions;
+    private List<Option_v> listOptions;
 }

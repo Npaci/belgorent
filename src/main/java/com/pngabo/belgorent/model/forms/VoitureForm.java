@@ -2,7 +2,7 @@ package com.pngabo.belgorent.model.forms;
 
 import com.pngabo.belgorent.model.entities.Location;
 import com.pngabo.belgorent.model.entities.Modele;
-import com.pngabo.belgorent.model.entities.Option;
+import com.pngabo.belgorent.model.entities.Option_v;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
@@ -34,5 +34,5 @@ public class VoitureForm {
     private List<Location> locationInterns;
     @NotNull
     private Modele modeleIntern;
-    private List<Option> optionInterns;
+    private List<Option_v> optionInterns;
 }

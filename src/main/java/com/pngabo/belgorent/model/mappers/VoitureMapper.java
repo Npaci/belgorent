@@ -13,9 +13,9 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
     public VoitureDTO entityToDTO(Voiture voiture) {
         return VoitureDTO.builder()
                 .id_voiture(voiture.getId_voiture())
-                .carburant("test")
+                .carburant(voiture.getCarburant().carburant)
                 .couleur(voiture.getCouleur())
-                .etat("test")
+                .etat(voiture.getEtat().etat)
                 .kilometre(voiture.getKilometre())
                 .locationInterns(voiture.getListLocations().stream()
                         .map((loc) -> {
@@ -43,7 +43,7 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
                         })
                         .collect(Collectors.toList()))
                 .prix(voiture.getPrix())
-                .type("test")
+                .type(voiture.getType().type)
                 .build();
     }
 

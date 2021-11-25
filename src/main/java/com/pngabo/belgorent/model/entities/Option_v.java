@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class Option {
+public class Option_v {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_option;
