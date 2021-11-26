@@ -1,5 +1,8 @@
 package com.pngabo.belgorent.model.mappers;
 
+import com.pngabo.belgorent.model.Carburant;
+import com.pngabo.belgorent.model.EtatVoiture;
+import com.pngabo.belgorent.model.TypeVoiture;
 import com.pngabo.belgorent.model.dtos.VoitureDTO;
 import com.pngabo.belgorent.model.entities.Voiture;
 import com.pngabo.belgorent.model.forms.VoitureForm;
@@ -9,6 +12,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
+//    private final ModeleRepository;
     @Override
     public VoitureDTO entityToDTO(Voiture voiture) {
         return VoitureDTO.builder()
@@ -32,6 +36,7 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
                 .modeleIntern(VoitureDTO.ModeleIntern.builder()
                         .id_modele(voiture.getModele().getId_modele())
                         .nom(voiture.getModele().getNom())
+                        .nomMarque(voiture.getModele().getMarque().getNom())
                         .build())
                 .optionInterns(voiture.getListOptions().stream()
                         .map((op) -> {
@@ -48,7 +53,19 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
     }
 
     @Override
-    public Voiture formToEntity(VoitureForm voitureForm) {
-        return null;
+    public Voiture formToEntity(VoitureForm form) {
+        return Voiture.builder()
+                .id_voiture(form.getId_voiture())
+                .carburant(Carburant.valueOf(form.getCarburant()))
+                .couleur(form.getCouleur())
+                .etat(EtatVoiture.valueOf(form.getEtat()))
+                .kilometre(form.getKilometre())
+                .manuelle(form.isManuelle())
+                .type(TypeVoiture.valueOf(form.getType()))
+                .prix(form.getPrix())
+//                .modele(form.)
+//                .listLocations()
+//                .listOptions()
+                .build();
     }
 }

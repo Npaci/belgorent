@@ -36,6 +36,8 @@ public class LocationDTO {
         private boolean manuelle;
         private String type;
         private String etat;
+        private String marque;
+        private String modele;
     }
 
 }

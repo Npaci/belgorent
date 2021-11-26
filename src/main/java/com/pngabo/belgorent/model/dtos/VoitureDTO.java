@@ -36,6 +36,7 @@ public class VoitureDTO {
     public static class ModeleIntern {
         private long id_modele;
         private String nom;
+        private String nomMarque;
     }
 
     @Data
