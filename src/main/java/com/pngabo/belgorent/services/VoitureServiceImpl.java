@@ -22,6 +22,12 @@ public class VoitureServiceImpl implements VoitureService {
         this.mapper = mapper;
     }
 
+    public List<VoitureDTO> getAllByStatus(String status) {
+        return repository.findByStatus(status).stream()
+                .map(mapper::entityToDTO)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public List<VoitureDTO> getAll() {
         return repository.findAll().stream()

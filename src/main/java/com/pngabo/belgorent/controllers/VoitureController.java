@@ -1,5 +1,6 @@
 package com.pngabo.belgorent.controllers;
 
+import com.pngabo.belgorent.model.EtatVoiture;
 import com.pngabo.belgorent.model.dtos.VoitureDTO;
 import com.pngabo.belgorent.model.forms.VoitureForm;
 import com.pngabo.belgorent.services.VoitureServiceImpl;
@@ -16,6 +17,11 @@ public class VoitureController {
 
     public VoitureController(VoitureServiceImpl service) {
         this.service = service;
+    }
+
+    @GetMapping(path = "/ready")
+    public List<VoitureDTO> getAllReady() {
+        return service.getAllByStatus(EtatVoiture.PRET.etat);
     }
 
     @GetMapping(path = {"", "/", "/all"})
