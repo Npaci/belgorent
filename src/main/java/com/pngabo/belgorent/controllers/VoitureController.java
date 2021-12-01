@@ -21,7 +21,7 @@ public class VoitureController {
 
     @GetMapping(path = "/ready")
     public List<VoitureDTO> getAllReady() {
-        return service.getAllByStatus(EtatVoiture.PRET.etat);
+        return service.getAllByStatus(EtatVoiture.PRET.name());
     }
 
     @GetMapping(path = {"", "/", "/all"})

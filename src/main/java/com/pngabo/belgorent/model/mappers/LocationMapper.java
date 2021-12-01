@@ -19,29 +19,37 @@ public class LocationMapper implements Mapper<Location, LocationDTO, LocationFor
                 .date_fin(entity.getDate_fin())
                 .lieu_dep(entity.getLieu_dep())
                 .lieu_arr(entity.getLieu_arr())
-                .clientIntern(LocationDTO.ClientIntern.builder()
+                .client(LocationDTO.ClientIntern.builder()
                         .id_client(c.getId_client())
                         .nom(c.getNom())
                         .prenom(c.getPrenom())
                         .date_naiss(c.getDate_naiss())
                         .build())
-                .voitureIntern(LocationDTO.VoitureIntern.builder()
+                .voiture(LocationDTO.VoitureIntern.builder()
                         .id_voiture(v.getId_voiture())
-                        .carburant(v.getCarburant().carburant)
+                        .carburant(v.getCarburant())
                         .couleur(v.getCouleur())
-                        .etat(v.getEtat().etat)
+                        .etat(v.getEtat())
                         .kilometre(v.getKilometre())
                         .manuelle(v.isManuelle())
                         .prix(v.getPrix())
-                        .type(v.getType().type)
-                        .marque(v.getModele().getMarque().getNom())
-                        .modele(v.getModele().getNom())
+                        .type(v.getType())
+                        .marque(v.getModele().getMarque() != null? v.getModele().getMarque().getNom() : null )
+                        .modele(v.getModele() != null? v.getModele().getNom() : null )
                         .build())
                 .build();
     }
 
     @Override
     public Location formToEntity(LocationForm form) {
-        return null;
+        return Location.builder()
+                .id_location(form.getId_location())
+                .date_debut(form.getDate_debut())
+                .date_fin(form.getDate_fin())
+                .lieu_dep(form.getLieu_dep())
+                .lieu_arr(form.getLieu_arr())
+                .client(form.getClient())
+                .voiture(form.getVoiture())
+                .build();
     }
 }

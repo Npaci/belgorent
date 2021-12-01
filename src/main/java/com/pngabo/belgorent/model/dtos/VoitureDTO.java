@@ -1,5 +1,7 @@
 package com.pngabo.belgorent.model.dtos;
 
+import com.pngabo.belgorent.model.EtatVoiture;
+import com.pngabo.belgorent.model.TypeVoiture;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,8 +17,8 @@ public class VoitureDTO {
     private String carburant;
     private double kilometre;
     private boolean manuelle;
-    private String type;
-    private String etat;
+    private TypeVoiture type;
+    private EtatVoiture etat;
     private List<LocationIntern> locationInterns;
     private ModeleIntern modeleIntern;
     private List<OptionIntern> optionInterns;

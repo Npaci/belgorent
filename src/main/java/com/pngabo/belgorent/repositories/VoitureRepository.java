@@ -1,5 +1,6 @@
 package com.pngabo.belgorent.repositories;
 
+import com.pngabo.belgorent.model.EtatVoiture;
 import com.pngabo.belgorent.model.entities.Voiture;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

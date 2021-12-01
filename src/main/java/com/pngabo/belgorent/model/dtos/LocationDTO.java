@@ -1,5 +1,8 @@
 package com.pngabo.belgorent.model.dtos;
 
+import com.pngabo.belgorent.model.Carburant;
+import com.pngabo.belgorent.model.EtatVoiture;
+import com.pngabo.belgorent.model.TypeVoiture;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,8 +16,8 @@ public class LocationDTO {
     private String lieu_arr;
     private Date date_debut;
     private Date date_fin;
-    private ClientIntern clientIntern;
-    private VoitureIntern voitureIntern;
+    private ClientIntern client;
+    private VoitureIntern voiture;
 
     @Data
     @Builder
@@ -31,11 +34,11 @@ public class LocationDTO {
         private long id_voiture;
         private double prix;
         private String couleur;
-        private String carburant;
+        private Carburant carburant;
         private double kilometre;
         private boolean manuelle;
-        private String type;
-        private String etat;
+        private TypeVoiture type;
+        private EtatVoiture etat;
         private String marque;
         private String modele;
     }

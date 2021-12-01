@@ -17,9 +17,9 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
     public VoitureDTO entityToDTO(Voiture voiture) {
         return VoitureDTO.builder()
                 .id_voiture(voiture.getId_voiture())
-                .carburant(voiture.getCarburant().carburant)
+                .carburant(voiture.getCarburant().name())
                 .couleur(voiture.getCouleur())
-                .etat(voiture.getEtat().etat)
+                .etat(voiture.getEtat())
                 .kilometre(voiture.getKilometre())
                 .locationInterns(voiture.getListLocations().stream()
                         .map((loc) -> {
@@ -48,7 +48,7 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
                         })
                         .collect(Collectors.toList()))
                 .prix(voiture.getPrix())
-                .type(voiture.getType().type)
+                .type(voiture.getType())
                 .build();
     }
 
@@ -56,16 +56,16 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
     public Voiture formToEntity(VoitureForm form) {
         return Voiture.builder()
                 .id_voiture(form.getId_voiture())
-                .carburant(Carburant.valueOf(form.getCarburant()))
+                .carburant(form.getCarburant())
                 .couleur(form.getCouleur())
                 .etat(EtatVoiture.valueOf(form.getEtat()))
                 .kilometre(form.getKilometre())
                 .manuelle(form.isManuelle())
                 .type(TypeVoiture.valueOf(form.getType()))
                 .prix(form.getPrix())
-//                .modele(form.)
-//                .listLocations()
-//                .listOptions()
+                .modele(form.getModeleIntern())
+                .listLocations(form.getLocationInterns())
+                .listOptions(form.getOptionInterns())
                 .build();
     }
 }

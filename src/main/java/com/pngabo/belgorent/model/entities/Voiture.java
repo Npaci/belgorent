@@ -34,6 +34,7 @@ public class Voiture {
     @OneToMany(mappedBy = "voiture", fetch = FetchType.EAGER)
     private List<Location> listLocations;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToOne
     @JoinColumn(name = "modele_id")
     private Modele modele;

@@ -1,5 +1,6 @@
 package com.pngabo.belgorent.model.forms;
 
+import com.pngabo.belgorent.model.Carburant;
 import com.pngabo.belgorent.model.entities.Location;
 import com.pngabo.belgorent.model.entities.Modele;
 import com.pngabo.belgorent.model.entities.Option_v;
@@ -22,7 +23,7 @@ public class VoitureForm {
     @NotBlank
     private String couleur;
     @NotBlank
-    private String carburant;
+    private Carburant carburant;
     @NotNull
     private double kilometre;
     @NotNull

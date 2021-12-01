@@ -1,6 +1,5 @@
 package com.pngabo.belgorent.model.forms;
 
-import com.pngabo.belgorent.model.dtos.LocationDTO;
 import com.pngabo.belgorent.model.entities.Client;
 import com.pngabo.belgorent.model.entities.Voiture;
 import lombok.Builder;
