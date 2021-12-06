@@ -1,4 +1,4 @@
-package com.pngabo.belgorent.model.entities;
+package com.pngabo.belgorent.models.entities;
 
 import lombok.*;
 

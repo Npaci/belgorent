@@ -1,6 +1,6 @@
-package com.pngabo.belgorent.model.forms;
+package com.pngabo.belgorent.models.forms;
 
-import com.pngabo.belgorent.model.entities.Location;
+import com.pngabo.belgorent.models.entities.Location;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;

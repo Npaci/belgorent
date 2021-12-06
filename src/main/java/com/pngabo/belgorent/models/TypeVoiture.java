@@ -1,4 +1,4 @@
-package com.pngabo.belgorent.model;
+package com.pngabo.belgorent.models;
 
 public enum TypeVoiture {
     STANDARD,

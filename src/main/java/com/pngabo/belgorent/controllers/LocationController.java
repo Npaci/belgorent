@@ -1,7 +1,7 @@
 package com.pngabo.belgorent.controllers;
 
-import com.pngabo.belgorent.model.dtos.LocationDTO;
-import com.pngabo.belgorent.model.forms.LocationForm;
+import com.pngabo.belgorent.models.dtos.LocationDTO;
+import com.pngabo.belgorent.models.forms.LocationForm;
 import com.pngabo.belgorent.services.LocationServiceImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;

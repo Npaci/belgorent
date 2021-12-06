@@ -1,4 +1,4 @@
-package com.pngabo.belgorent.model.mappers;
+package com.pngabo.belgorent.models.mappers;
 
 public interface Mapper <ENTITY, DTO, FORM> {
     DTO entityToDTO(ENTITY entity);

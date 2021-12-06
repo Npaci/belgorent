@@ -2,66 +2,60 @@ package com.pngabo.belgorent.services;
 
 import com.pngabo.belgorent.exceptions.ElementAlreadyExistException;
 import com.pngabo.belgorent.exceptions.ElementNotFoundException;
-import com.pngabo.belgorent.models.dtos.VoitureDTO;
-import com.pngabo.belgorent.models.entities.Voiture;
-import com.pngabo.belgorent.models.forms.VoitureForm;
-import com.pngabo.belgorent.models.mappers.VoitureMapper;
-import com.pngabo.belgorent.repositories.VoitureRepository;
+import com.pngabo.belgorent.models.dtos.MarqueDTO;
+import com.pngabo.belgorent.models.entities.Marque;
+import com.pngabo.belgorent.models.forms.MarqueForm;
+import com.pngabo.belgorent.models.mappers.MarqueMapper;
+import com.pngabo.belgorent.repositories.MarqueRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class VoitureServiceImpl implements VoitureService {
-    private final VoitureRepository repository;
-    private final VoitureMapper mapper;
+public class MarqueServiceImpl implements MarqueService {
+    private final MarqueRepository repository;
+    private final MarqueMapper mapper;
 
-    public VoitureServiceImpl(VoitureRepository repository, VoitureMapper mapper) {
+    public MarqueServiceImpl(MarqueRepository repository, MarqueMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
 
-    public List<VoitureDTO> getAllByStatus(String status) {
-        return repository.findByStatus(status).stream()
-                .map(mapper::entityToDTO)
-                .collect(Collectors.toList());
-    }
-
     @Override
-    public List<VoitureDTO> getAll() {
+    public List<MarqueDTO> getAll() {
         return repository.findAll().stream()
                 .map(mapper::entityToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public VoitureDTO getOne(Long aLong) {
+    public MarqueDTO getOne(Long aLong) {
         if (!repository.existsById(aLong))
             throw new ElementNotFoundException();
 
-        Voiture found = repository.findById(aLong)
+        Marque found = repository.findById(aLong)
                 .orElseThrow(ElementNotFoundException::new);
 
         return mapper.entityToDTO(found);
     }
 
     @Override
-    public VoitureDTO insert(VoitureForm form) {
-        if (repository.existsById(form.getId_voiture()))
+    public MarqueDTO insert(MarqueForm form) {
+        if (repository.existsById(form.getId_marque()))
             throw new ElementAlreadyExistException();
 
-        Voiture toInsert = mapper.formToEntity(form);
+        Marque toInsert = mapper.formToEntity(form);
 
         return mapper.entityToDTO(repository.save(toInsert));
     }
 
     @Override
-    public VoitureDTO delete(Long aLong) {
+    public MarqueDTO delete(Long aLong) {
         if (!repository.existsById(aLong))
             throw new ElementNotFoundException();
 
-        Voiture todelete = repository.findById(aLong)
+        Marque todelete = repository.findById(aLong)
                 .orElseThrow(ElementNotFoundException::new);
 
         repository.delete(todelete);
@@ -70,11 +64,11 @@ public class VoitureServiceImpl implements VoitureService {
     }
 
     @Override
-    public VoitureDTO update(VoitureForm form) {
-        if (!repository.existsById(form.getId_voiture()))
+    public MarqueDTO update(MarqueForm form) {
+        if (!repository.existsById(form.getId_marque()))
             throw new ElementNotFoundException();
 
-        Voiture toUpdate = mapper.formToEntity(form);
+        Marque toUpdate = mapper.formToEntity(form);
 
         return mapper.entityToDTO(repository.save(toUpdate));
     }

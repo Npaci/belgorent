@@ -1,8 +1,8 @@
-package com.pngabo.belgorent.model.dtos;
+package com.pngabo.belgorent.models.dtos;
 
-import com.pngabo.belgorent.model.Carburant;
-import com.pngabo.belgorent.model.EtatVoiture;
-import com.pngabo.belgorent.model.TypeVoiture;
+import com.pngabo.belgorent.models.Carburant;
+import com.pngabo.belgorent.models.EtatVoiture;
+import com.pngabo.belgorent.models.TypeVoiture;
 import lombok.Builder;
 import lombok.Data;
 

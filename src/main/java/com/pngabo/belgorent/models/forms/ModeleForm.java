@@ -1,4 +1,4 @@
-package com.pngabo.belgorent.model.forms;
+package com.pngabo.belgorent.models.forms;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class ModeleForm {
-    private long id_marque;
+    private long id_modele;
     private String nom;
 }

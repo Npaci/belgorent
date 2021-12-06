@@ -1,8 +1,8 @@
 package com.pngabo.belgorent.controllers;
 
-import com.pngabo.belgorent.model.EtatVoiture;
-import com.pngabo.belgorent.model.dtos.VoitureDTO;
-import com.pngabo.belgorent.model.forms.VoitureForm;
+import com.pngabo.belgorent.models.EtatVoiture;
+import com.pngabo.belgorent.models.dtos.VoitureDTO;
+import com.pngabo.belgorent.models.forms.VoitureForm;
 import com.pngabo.belgorent.services.VoitureServiceImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;

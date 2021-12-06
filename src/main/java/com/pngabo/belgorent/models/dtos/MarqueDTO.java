@@ -1,4 +1,4 @@
-package com.pngabo.belgorent.model.dtos;
+package com.pngabo.belgorent.models.dtos;
 
 import lombok.Builder;
 import lombok.Data;

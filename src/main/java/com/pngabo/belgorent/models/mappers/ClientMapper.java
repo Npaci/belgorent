@@ -1,8 +1,8 @@
-package com.pngabo.belgorent.model.mappers;
+package com.pngabo.belgorent.models.mappers;
 
-import com.pngabo.belgorent.model.dtos.ClientDTO;
-import com.pngabo.belgorent.model.entities.Client;
-import com.pngabo.belgorent.model.forms.ClientForm;
+import com.pngabo.belgorent.models.dtos.ClientDTO;
+import com.pngabo.belgorent.models.entities.Client;
+import com.pngabo.belgorent.models.forms.ClientForm;
 import org.springframework.stereotype.Component;
 
 @Component

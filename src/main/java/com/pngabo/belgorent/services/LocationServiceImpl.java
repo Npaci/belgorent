@@ -2,11 +2,10 @@ package com.pngabo.belgorent.services;
 
 import com.pngabo.belgorent.exceptions.ElementAlreadyExistException;
 import com.pngabo.belgorent.exceptions.ElementNotFoundException;
-import com.pngabo.belgorent.model.dtos.LocationDTO;
-import com.pngabo.belgorent.model.entities.Location;
-import com.pngabo.belgorent.model.entities.Voiture;
-import com.pngabo.belgorent.model.forms.LocationForm;
-import com.pngabo.belgorent.model.mappers.LocationMapper;
+import com.pngabo.belgorent.models.dtos.LocationDTO;
+import com.pngabo.belgorent.models.entities.Location;
+import com.pngabo.belgorent.models.forms.LocationForm;
+import com.pngabo.belgorent.models.mappers.LocationMapper;
 import com.pngabo.belgorent.repositories.LocationRepository;
 import org.springframework.stereotype.Service;
 

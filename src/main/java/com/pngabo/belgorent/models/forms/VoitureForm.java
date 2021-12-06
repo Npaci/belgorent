@@ -1,9 +1,9 @@
-package com.pngabo.belgorent.model.forms;
+package com.pngabo.belgorent.models.forms;
 
-import com.pngabo.belgorent.model.Carburant;
-import com.pngabo.belgorent.model.entities.Location;
-import com.pngabo.belgorent.model.entities.Modele;
-import com.pngabo.belgorent.model.entities.Option_v;
+import com.pngabo.belgorent.models.Carburant;
+import com.pngabo.belgorent.models.entities.Location;
+import com.pngabo.belgorent.models.entities.Modele;
+import com.pngabo.belgorent.models.entities.Option_v;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
@@ -19,10 +19,12 @@ public class VoitureForm {
     @NotNull
     private long id_voiture;
     @NotNull
+    private long modele_id;
+    @NotNull
     private double prix;
     @NotBlank
     private String couleur;
-    @NotBlank
+    @NotNull
     private Carburant carburant;
     @NotNull
     private double kilometre;
@@ -34,6 +36,6 @@ public class VoitureForm {
     private String etat;
     private List<Location> locationInterns;
     @NotNull
-    private Modele modeleIntern;
+    private Modele modele;
     private List<Option_v> optionInterns;
 }

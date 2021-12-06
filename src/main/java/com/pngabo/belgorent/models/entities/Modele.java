@@ -1,6 +1,8 @@
-package com.pngabo.belgorent.model.entities;
+package com.pngabo.belgorent.models.entities;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;

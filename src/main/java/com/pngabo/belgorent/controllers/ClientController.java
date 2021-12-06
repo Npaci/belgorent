@@ -1,7 +1,7 @@
 package com.pngabo.belgorent.controllers;
 
-import com.pngabo.belgorent.model.dtos.ClientDTO;
-import com.pngabo.belgorent.model.forms.ClientForm;
+import com.pngabo.belgorent.models.dtos.ClientDTO;
+import com.pngabo.belgorent.models.forms.ClientForm;
 import com.pngabo.belgorent.services.ClientServiceImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
