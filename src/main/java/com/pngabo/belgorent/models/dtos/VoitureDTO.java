@@ -19,6 +19,7 @@ public class VoitureDTO {
     private boolean manuelle;
     private TypeVoiture type;
     private EtatVoiture etat;
+    private String image;
     private List<LocationIntern> locationInterns;
     private ModeleIntern modeleIntern;
     private List<OptionIntern> optionInterns;

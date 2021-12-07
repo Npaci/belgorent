@@ -31,6 +31,10 @@ public class Voiture {
     @Enumerated(EnumType.STRING)
     private EtatVoiture etat;
 
+    @Lob
+    @Column(nullable = false)
+    private String image;
+
     @OneToMany(mappedBy = "voiture", fetch = FetchType.EAGER)
     private List<Location> listLocations;
 

@@ -37,5 +37,7 @@ public class VoitureForm {
     private List<Location> locationInterns;
     @NotNull
     private Modele modele;
+    @NotBlank
+    private String image;
     private List<Option_v> optionInterns;
 }

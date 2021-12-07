@@ -1,4 +1,4 @@
-package com.pngabo.belgorent.security;
+package com.pngabo.belgorent.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

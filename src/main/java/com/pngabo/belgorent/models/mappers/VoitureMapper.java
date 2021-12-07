@@ -29,6 +29,9 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
                 .prix(voiture.getPrix())
                 .type(voiture.getType());
 
+        if (voiture.getImage() != null)
+            builder.image(voiture.getImage());
+
         if( voiture.getListLocations() != null)
             builder.locationInterns(voiture.getListLocations().stream()
                 .map((loc) -> {
@@ -72,6 +75,7 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
                 .modele(form.getModele())
                 .listLocations(form.getLocationInterns())
                 .listOptions(form.getOptionInterns())
+                .image(form.getImage())
                 .build();
     }
 }
