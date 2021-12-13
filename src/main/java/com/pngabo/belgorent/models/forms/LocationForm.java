@@ -6,8 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -21,9 +23,11 @@ public class LocationForm {
     @NotBlank
     private String lieu_arr;
     @NotNull
-    private Date date_debut;
+    @Future
+    private LocalDate date_debut;
     @NotNull
-    private Date date_fin;
+    @Future
+    private LocalDate date_fin;
     @NotNull
     private Client client;
     @NotNull

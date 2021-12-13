@@ -2,6 +2,7 @@ package com.pngabo.belgorent.controllers;
 
 import com.pngabo.belgorent.models.EtatVoiture;
 import com.pngabo.belgorent.models.dtos.VoitureDTO;
+import com.pngabo.belgorent.models.forms.FilterForm;
 import com.pngabo.belgorent.models.forms.VoitureForm;
 import com.pngabo.belgorent.services.VoitureServiceImpl;
 import org.springframework.security.core.Authentication;
@@ -24,6 +25,21 @@ public class VoitureController {
         return service.getAllByStatus(EtatVoiture.PRET.name());
     }
 
+    @GetMapping(path = "/colors")
+    public List<String> getAllColors() {
+        return service.getAllColors();
+    }
+
+    @GetMapping(path = "/types")
+    public List<String> getAllTypes() {
+        return service.getAllTypes();
+    }
+
+    @GetMapping(path = "/fuels")
+    public List<String> getAllFuels() {
+        return service.getAllFuels();
+    }
+
     @GetMapping(path = {"", "/", "/all"})
     public List<VoitureDTO> getAll() {
         return service.getAll();
@@ -43,6 +59,12 @@ public class VoitureController {
     public VoitureDTO insert(@Valid @RequestBody VoitureForm form) {
         //form.setPassword(encoder.encode(form.getPassword()));
         return service.insert(form);
+    }
+
+    @PostMapping(path = "/filter")
+    public List<VoitureDTO> getFiltered(@RequestBody FilterForm form) {
+        System.out.println(">>>>>>>>>>> filter: "+form.toString());
+        return service.getFiltered(form);
     }
 
     @PatchMapping(path = {"", "/", "/update"})

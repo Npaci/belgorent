@@ -5,6 +5,7 @@ import com.pngabo.belgorent.exceptions.ElementNotFoundException;
 import com.pngabo.belgorent.exceptions.ImageTooLargeException;
 import com.pngabo.belgorent.models.dtos.VoitureDTO;
 import com.pngabo.belgorent.models.entities.Voiture;
+import com.pngabo.belgorent.models.forms.FilterForm;
 import com.pngabo.belgorent.models.forms.VoitureForm;
 import com.pngabo.belgorent.models.mappers.VoitureMapper;
 import com.pngabo.belgorent.repositories.VoitureRepository;
@@ -29,6 +30,38 @@ public class VoitureServiceImpl implements VoitureService {
         return repository.findByStatus(status).stream()
                 .map(mapper::entityToDTO)
                 .collect(Collectors.toList());
+    }
+
+    public List<VoitureDTO> getFiltered(FilterForm form) {
+        String marque = form.getMarque();
+        String modele = form.getModele();
+        String couleur = form.getCouleur();
+        String etat = form.getEtat();
+        String carburant = form.getCarburant();
+        String type = form.getTypev();
+
+        return repository.findOnCriterias(marque.equals("-") || marque.equals("") || marque.equals(" ") ? "%" : marque,
+                        modele.equals("-") || modele.equals("") || modele.equals(" ") ? "%" : modele,
+                        etat.equals("-") || etat.equals("") || etat.equals(" ") ? "%" : etat,
+                        carburant.equals("-") || carburant.equals("") || carburant.equals(" ") ? "%" : carburant,
+                        form.isManuelle(),
+                        type.equals("-") || type.equals("") || type.equals(" ") ? "%" : type,
+                        couleur.equals("-") || couleur.equals("") || couleur.equals(" ") ? "%" : couleur)
+                .stream()
+                .map(mapper::entityToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getAllColors() {
+        return repository.findAvailableColors();
+    }
+
+    public List<String> getAllTypes() {
+        return repository.findAvailableTypes();
+    }
+
+    public List<String> getAllFuels() {
+        return repository.findAvailableFuels();
     }
 
     @Override
@@ -85,4 +118,5 @@ public class VoitureServiceImpl implements VoitureService {
 
         return mapper.entityToDTO(repository.save(toUpdate));
     }
+
 }

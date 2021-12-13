@@ -3,6 +3,7 @@ package com.pngabo.belgorent.controllers;
 import com.pngabo.belgorent.exceptions.ElementAlreadyExistException;
 import com.pngabo.belgorent.exceptions.ElementNotFoundException;
 import com.pngabo.belgorent.exceptions.ImageTooLargeException;
+import com.pngabo.belgorent.exceptions.InvalidDateException;
 import com.pngabo.belgorent.models.dtos.ErrorDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,14 +12,17 @@ import org.springframework.security.authentication.AuthenticationCredentialsNotF
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.Instant;
 
 @ControllerAdvice
-public class ControllerAdviser {
+public class ControllerAdviser extends ResponseEntityExceptionHandler {
 //    Dans un controller
 //    @ExceptionHandler(ElementNotFoundException.class)
 //    @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -62,7 +66,7 @@ public class ControllerAdviser {
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity<ErrorDTO> handle(SQLIntegrityConstraintViolationException ex) {
         String msg = ex.getMessage();
-
+        System.out.println(">>>>>>>>>>>>>> "+msg);
         if (msg.contains("ON PUBLIC.UTILISATEUR(USERNAME)"))
             msg = "Ce nom d'utilisateur existe déjà!";
         else
@@ -89,6 +93,19 @@ public class ControllerAdviser {
 
     @ExceptionHandler(ImageTooLargeException.class)
     public ResponseEntity<ErrorDTO> handle(ImageTooLargeException ex) {
+        return  ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ErrorDTO(ex.getMessage()));
+    }
+
+//    @Override
+//    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        headers.set("message", "L'utilisateur doit être né avant aujourd'hui");
+//        return super.handleMethodArgumentNotValid(ex, headers, status, request);
+//    }
+
+    @ExceptionHandler(InvalidDateException.class)
+    public ResponseEntity<ErrorDTO> handle(InvalidDateException ex) {
         return  ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ErrorDTO(ex.getMessage()));

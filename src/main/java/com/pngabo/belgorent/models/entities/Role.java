@@ -1,6 +1,9 @@
 package com.pngabo.belgorent.models.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -12,19 +15,17 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
-public class Option_v {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_option;
+    private long id;
     private String nom;
-    private double prix;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
-    @JoinTable(name = "Voiture_Option",
-            joinColumns = @JoinColumn(name = "option_id"),
-            inverseJoinColumns = @JoinColumn(name = "voiture_id")
+    @JoinTable(name = "utilisateurs_role",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "utilisateur_id")
     )
-    private List<Voiture> listVoitures;
+    private List<Utilisateur> utilisateurs;
 }

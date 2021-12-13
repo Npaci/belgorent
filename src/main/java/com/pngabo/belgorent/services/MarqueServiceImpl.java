@@ -22,6 +22,12 @@ public class MarqueServiceImpl implements MarqueService {
         this.mapper = mapper;
     }
 
+    public List<MarqueDTO> getAllUsedBrands() {
+        return repository.findAllUsed().stream()
+                .map(mapper::entityToDTO)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public List<MarqueDTO> getAll() {
         return repository.findAll().stream()

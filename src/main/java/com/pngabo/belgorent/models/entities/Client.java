@@ -1,24 +1,27 @@
 package com.pngabo.belgorent.models.entities;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@DiscriminatorValue("CLIENT")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_client;
-    private String nom;
-    private String prenom;
-    private Date date_naiss;
+@SuperBuilder
+public class Client extends Utilisateur {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id_client;
+//    private String nom;
+//    private String prenom;
+    private LocalDate date_naiss;
 
     @OneToMany(mappedBy = "client")
     private List<Location> listLocations;

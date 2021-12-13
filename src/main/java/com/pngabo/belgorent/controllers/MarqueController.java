@@ -33,6 +33,12 @@ public class MarqueController {
         return service.getOne(id);
     }
 
+    @GetMapping(path = "/usedbrands")
+    public List<MarqueDTO> getAllUsed() {
+        return service.getAllUsedBrands();
+    }
+
+
     @PostMapping(path = {"", "/", "/add"})
     public MarqueDTO insert(@Valid @RequestBody MarqueForm form) {
         return service.insert(form);

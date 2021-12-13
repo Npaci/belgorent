@@ -15,7 +15,7 @@ public class Menu {
     }
 
     public void afficherVoitures() {
-        System.out.println(vService.getAll());
+//        System.out.println(vService.getAll());
     }
     public void afficherLocations() {
         System.out.println(lService.getAll());
