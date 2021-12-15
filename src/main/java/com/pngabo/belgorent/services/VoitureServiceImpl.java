@@ -3,6 +3,7 @@ package com.pngabo.belgorent.services;
 import com.pngabo.belgorent.exceptions.ElementAlreadyExistException;
 import com.pngabo.belgorent.exceptions.ElementNotFoundException;
 import com.pngabo.belgorent.exceptions.ImageTooLargeException;
+import com.pngabo.belgorent.models.EtatVoiture;
 import com.pngabo.belgorent.models.dtos.VoitureDTO;
 import com.pngabo.belgorent.models.entities.Voiture;
 import com.pngabo.belgorent.models.forms.FilterForm;
@@ -62,6 +63,17 @@ public class VoitureServiceImpl implements VoitureService {
 
     public List<String> getAllFuels() {
         return repository.findAvailableFuels();
+    }
+
+    public VoitureDTO changeStatus(long id, EtatVoiture status) {
+        if (!repository.existsById(id))
+            throw new ElementNotFoundException();
+
+        Voiture found = repository.findById(id)
+                .orElseThrow(ElementNotFoundException::new);
+        found.setEtat(status);
+
+        return mapper.entityToDTO(repository.save(found));
     }
 
     @Override

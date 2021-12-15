@@ -30,7 +30,7 @@ public class JwtProvider {
                 .withClaim("roles", roles)
                 .sign(Algorithm.HMAC512(SecurityConstants.JWT_KEY));
 
-        return "Bearer " + token;
+        return SecurityConstants.TOKEN_PREFIX + token;
     }
 
     public String resolveToken(HttpServletRequest request){

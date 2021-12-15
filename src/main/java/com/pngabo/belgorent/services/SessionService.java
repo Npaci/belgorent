@@ -25,13 +25,14 @@ public class SessionService {
     }
 
     public String login(LoginForm form) {
+        Utilisateur user = repository.findByUsername(form.getUsername())
+                .orElseThrow( () -> new UsernameNotFoundException("L'utilisateur n'existe pas"));
+
         // créer l'authentification
         Authentication authentication = new UsernamePasswordAuthenticationToken(form.getUsername(), form.getPassword());
         //Tester l'authentication
         auth.authenticate(authentication);
         //-> Ok: Créer token et renvoyer
-        Utilisateur user = repository.findByUsername(form.getUsername())
-                .orElseThrow( () -> new UsernameNotFoundException("L'utilisateur n'existe pas"));;
 
         return jwtProvider.createToken(user.getUsername(), user.getRoles().stream()
                 .map((elm)-> {

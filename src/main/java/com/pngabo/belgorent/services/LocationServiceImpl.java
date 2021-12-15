@@ -2,6 +2,7 @@ package com.pngabo.belgorent.services;
 
 import com.pngabo.belgorent.exceptions.ElementAlreadyExistException;
 import com.pngabo.belgorent.exceptions.ElementNotFoundException;
+import com.pngabo.belgorent.models.EtatVoiture;
 import com.pngabo.belgorent.models.dtos.LocationDTO;
 import com.pngabo.belgorent.models.entities.Location;
 import com.pngabo.belgorent.models.forms.LocationForm;
@@ -16,10 +17,12 @@ import java.util.stream.Collectors;
 public class LocationServiceImpl implements LocationService{
     private final LocationRepository lReposotory;
     private final LocationMapper mapper;
+    private final VoitureServiceImpl vServ;
 
-    public LocationServiceImpl(LocationRepository lReposotory, LocationMapper mapper) {
+    public LocationServiceImpl(LocationRepository lReposotory, LocationMapper mapper, VoitureServiceImpl vServ) {
         this.lReposotory = lReposotory;
         this.mapper = mapper;
+        this.vServ = vServ;
     }
 
     @Override
@@ -46,8 +49,10 @@ public class LocationServiceImpl implements LocationService{
             throw new ElementAlreadyExistException();
 
         Location toInsert = mapper.formToEntity(form);
+        Location inserted = lReposotory.save(toInsert);
+        vServ.changeStatus(toInsert.getVoiture().getId_voiture(), EtatVoiture.LOUE);
 
-        return mapper.entityToDTO(lReposotory.save(toInsert));
+        return mapper.entityToDTO(inserted);
     }
 
     @Override

@@ -60,7 +60,7 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDTO> handle(BadCredentialsException ex) {
         return  ResponseEntity
                 .status(HttpStatus.FORBIDDEN)
-                .body(new ErrorDTO(ex.getMessage()));
+                .body(new ErrorDTO("Mot de passe incorrect"));
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
