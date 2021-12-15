@@ -2,14 +2,17 @@ package com.pngabo.belgorent.services;
 
 import com.pngabo.belgorent.exceptions.ElementAlreadyExistException;
 import com.pngabo.belgorent.exceptions.ElementNotFoundException;
+import com.pngabo.belgorent.exceptions.InvalidDateException;
 import com.pngabo.belgorent.models.EtatVoiture;
 import com.pngabo.belgorent.models.dtos.LocationDTO;
 import com.pngabo.belgorent.models.entities.Location;
+import com.pngabo.belgorent.models.entities.Utilisateur;
 import com.pngabo.belgorent.models.forms.LocationForm;
 import com.pngabo.belgorent.models.mappers.LocationMapper;
 import com.pngabo.belgorent.repositories.LocationRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +50,12 @@ public class LocationServiceImpl implements LocationService{
     public LocationDTO insert(LocationForm form) {
         if (lReposotory.existsById(form.getId_location()))
             throw new ElementAlreadyExistException();
+
+        if (!form.getDate_debut().isAfter(LocalDate.now()))
+            throw new InvalidDateException("La date de début de location doit être postérieur à la date du jour");
+
+        if (!form.getDate_fin().isAfter(form.getDate_debut()))
+            throw new InvalidDateException("La date de fin de location doit être postérieur à la date de départ");
 
         Location toInsert = mapper.formToEntity(form);
         Location inserted = lReposotory.save(toInsert);
