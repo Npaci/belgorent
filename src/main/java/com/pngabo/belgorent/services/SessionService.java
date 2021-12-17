@@ -1,5 +1,6 @@
 package com.pngabo.belgorent.services;
 
+import com.pngabo.belgorent.models.dtos.LoginSuccessDTO;
 import com.pngabo.belgorent.models.forms.LoginForm;
 import com.pngabo.belgorent.models.entities.Utilisateur;
 import com.pngabo.belgorent.repositories.UtilisateurRepository;
@@ -24,9 +25,9 @@ public class SessionService {
         this.jwtProvider = jwtProvider;
     }
 
-    public String login(LoginForm form) {
+    public LoginSuccessDTO login(LoginForm form) {
         Utilisateur user = repository.findByUsername(form.getUsername())
-                .orElseThrow( () -> new UsernameNotFoundException("L'utilisateur n'existe pas"));
+                .orElseThrow( () -> new UsernameNotFoundException("Identifiant ou Mot De Passe incorrect"));
 
         // créer l'authentification
         Authentication authentication = new UsernamePasswordAuthenticationToken(form.getUsername(), form.getPassword());
@@ -34,10 +35,15 @@ public class SessionService {
         auth.authenticate(authentication);
         //-> Ok: Créer token et renvoyer
 
-        return jwtProvider.createToken(user.getUsername(), user.getRoles().stream()
+        String jwt = jwtProvider.createToken(user.getUsername(), user.getRoles().stream()
                 .map((elm)-> {
                     return elm.getNom();
                 })
                 .collect(Collectors.toList()));
+
+        return LoginSuccessDTO.builder()
+                .username(form.getUsername())
+                .jwt(jwt)
+                .build();
     }
 }

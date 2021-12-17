@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable();
 
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/voiture/**").hasAuthority("ADMIN")
+//                .antMatchers(HttpMethod.GET, "/voiture/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest().permitAll();
 

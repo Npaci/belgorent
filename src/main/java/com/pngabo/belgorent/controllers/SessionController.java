@@ -1,5 +1,6 @@
 package com.pngabo.belgorent.controllers;
 
+import com.pngabo.belgorent.models.dtos.LoginSuccessDTO;
 import com.pngabo.belgorent.models.forms.LoginForm;
 import com.pngabo.belgorent.services.SessionService;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class SessionController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> longin(@Valid @RequestBody LoginForm form){
+    public ResponseEntity<LoginSuccessDTO> longin(@Valid @RequestBody LoginForm form){
         return ResponseEntity.ok(service.login(form));
     }
 }

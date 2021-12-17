@@ -16,6 +16,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return repository.findByUsername(s)
-                .orElseThrow(() -> new UsernameNotFoundException("L'utilisateur donné n'existe pas"));
+                .orElseThrow(() -> new UsernameNotFoundException("L'utilisateur n'existe pas"));
     }
 }

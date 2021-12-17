@@ -35,12 +35,5 @@ public class UtilisateurController {
             builder.date_naiss(((Client)user).getDate_naiss().toString());
 
         return builder.build();
-
-//        // console.log("INFO USER: " + JSON.stringify(receivedUser));
-//        sessionStorage.setItem("connectedId", stringify(receivedUser.id));
-//        sessionStorage.setItem("connectedName", receivedUser.nom);
-//        sessionStorage.setItem("connectedFirstName", receivedUser.prenom);
-//        sessionStorage.setItem("connectedBday", receivedUser.date_naiss);
-//        // sessionStorage.setItem("connectedRoles", stringify(receivedUser.roles));
     }
 }

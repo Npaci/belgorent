@@ -30,3 +30,5 @@ public interface VoitureRepository extends JpaRepository<Voiture, Long> {
     @Query(value = "SELECT distinct v.carburant FROM Voiture v", nativeQuery = true)
     List<String> findAvailableFuels();
 }
+
+

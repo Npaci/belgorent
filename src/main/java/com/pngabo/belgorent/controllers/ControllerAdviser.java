@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.Instant;
+import java.util.Locale;
 
 @ControllerAdvice
 public class ControllerAdviser extends ResponseEntityExceptionHandler {
@@ -60,14 +61,14 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDTO> handle(BadCredentialsException ex) {
         return  ResponseEntity
                 .status(HttpStatus.FORBIDDEN)
-                .body(new ErrorDTO("Mot de passe incorrect"));
+                .body(new ErrorDTO("Identifiant ou mot de passe incorrect"));
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity<ErrorDTO> handle(SQLIntegrityConstraintViolationException ex) {
-        String msg = ex.getMessage();
+        String msg = ex.getMessage().toUpperCase();
         System.out.println(">>>>>>>>>>>>>> "+msg);
-        if (msg.contains("ON PUBLIC.UTILISATEUR(USERNAME)"))
+        if (msg.contains("Duplicate".toUpperCase()))
             msg = "Ce nom d'utilisateur existe déjà!";
         else
             System.out.println("L'ERREUR NE CONTIENT PAS CE QUE L'ON CHERCHE!");
