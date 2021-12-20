@@ -5,6 +5,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Client extends Utilisateur {
 //    private long id_client;
 //    private String nom;
 //    private String prenom;
-    private LocalDate date_naiss;
+    private LocalDateTime date_naiss;
 
     @OneToMany(mappedBy = "client")
     private List<Location> listLocations;

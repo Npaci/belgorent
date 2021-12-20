@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class VoitureServiceImpl implements VoitureService {
-    private final long BLOB_SIZE = 65535L;
+    private final long BLOB_SIZE = 16777215L;
     private final VoitureRepository repository;
     private final VoitureMapper mapper;
 
@@ -130,5 +130,18 @@ public class VoitureServiceImpl implements VoitureService {
 
         return mapper.entityToDTO(repository.save(toUpdate));
     }
+
+//    public VoitureDTO changeStatus(VoitureForm form) {
+//        if (!repository.existsById(form.getId_voiture()))
+//            throw new ElementNotFoundException();
+//
+//        Voiture toUpdate = repository.findById(form.getId_voiture())
+//                .orElseThrow(ElementNotFoundException::new);
+//
+//        Voiture fromUser = mapper.formToEntity(form);
+//        toUpdate.setEtat(fromUser.getEtat());
+//
+//        return mapper.entityToDTO(repository.save(toUpdate));
+//    }
 
 }

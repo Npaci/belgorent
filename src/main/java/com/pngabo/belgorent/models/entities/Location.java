@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -18,8 +19,8 @@ public class Location {
     private long id_location;
     private String lieu_dep;
     private String lieu_arr;
-    private LocalDate date_debut;
-    private LocalDate date_fin;
+    private LocalDateTime date_debut;
+    private LocalDateTime date_fin;
 
     @ManyToOne
     @JoinColumn(name = "voiture_id")

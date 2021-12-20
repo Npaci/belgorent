@@ -1,10 +1,8 @@
 package com.pngabo.belgorent.controllers;
 
-import com.pngabo.belgorent.exceptions.ElementAlreadyExistException;
-import com.pngabo.belgorent.exceptions.ElementNotFoundException;
-import com.pngabo.belgorent.exceptions.ImageTooLargeException;
-import com.pngabo.belgorent.exceptions.InvalidDateException;
+import com.pngabo.belgorent.exceptions.*;
 import com.pngabo.belgorent.models.dtos.ErrorDTO;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.Instant;
 import java.util.Locale;
@@ -64,18 +63,12 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
                 .body(new ErrorDTO("Identifiant ou mot de passe incorrect"));
     }
 
-    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<ErrorDTO> handle(SQLIntegrityConstraintViolationException ex) {
-        String msg = ex.getMessage().toUpperCase();
-        System.out.println(">>>>>>>>>>>>>> "+msg);
-        if (msg.contains("Duplicate".toUpperCase()))
-            msg = "Ce nom d'utilisateur existe déjà!";
-        else
-            System.out.println("L'ERREUR NE CONTIENT PAS CE QUE L'ON CHERCHE!");
+    @ExceptionHandler(UsernameAlreadyExist.class)
+    public ResponseEntity<ErrorDTO> handle(UsernameAlreadyExist ex) {
 
         return  ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ErrorDTO(msg));
+                .body(new ErrorDTO(ex.getMessage()));
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
@@ -111,4 +104,15 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ErrorDTO(ex.getMessage()));
     }
+
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<ErrorDTO> handle(MethodArgumentNotValidException ex) {
+//        String msg = ex.getMessage().toUpperCase();
+//        System.out.println(">>>>>>>>>>>>>> "+msg);
+//        if (msg.contains("must be a date".toUpperCase()))
+//            msg = "Date non valide!";
+//        return  ResponseEntity
+//                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                .body(new ErrorDTO(msg));
+//    }
 }

@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -18,7 +18,7 @@ public class VoitureDTO {
     private String carburant;
     private double kilometre;
     private boolean manuelle;
-    private TypeVoiture type;
+    private TypeVoiture typev;
     private EtatVoiture etat;
     private String image;
     private List<LocationIntern> locationInterns;
@@ -31,8 +31,8 @@ public class VoitureDTO {
         private long id_location;
         private String lieu_dep;
         private String lieu_arr;
-        private LocalDate date_debut;
-        private LocalDate date_fin;
+        private LocalDateTime date_debut;
+        private LocalDateTime date_fin;
     }
 
     @Data

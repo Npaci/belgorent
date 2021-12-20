@@ -3,6 +3,7 @@ package com.pngabo.belgorent.services;
 import com.pngabo.belgorent.exceptions.ElementAlreadyExistException;
 import com.pngabo.belgorent.exceptions.ElementNotFoundException;
 import com.pngabo.belgorent.exceptions.InvalidDateException;
+import com.pngabo.belgorent.exceptions.UsernameAlreadyExist;
 import com.pngabo.belgorent.models.dtos.ClientDTO;
 import com.pngabo.belgorent.models.entities.Client;
 import com.pngabo.belgorent.models.entities.Utilisateur;
@@ -10,19 +11,23 @@ import com.pngabo.belgorent.models.forms.ClientForm;
 import com.pngabo.belgorent.models.mappers.ClientMapper;
 import com.pngabo.belgorent.repositories.ClientRepository;
 import com.pngabo.belgorent.repositories.RoleRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ClientServiceImpl implements ClientService{
+    private final UtilisateurServiceImpl uService;
     private final ClientRepository repository;
     private final ClientMapper mapper;
     private final RoleRepository repRole;
 
-    public ClientServiceImpl(ClientRepository repository, ClientMapper mapper, RoleRepository repRole) {
+    public ClientServiceImpl(UtilisateurServiceImpl uService, ClientRepository repository, ClientMapper mapper, RoleRepository repRole) {
+        this.uService = uService;
         this.repository = repository;
         this.mapper = mapper;
         this.repRole = repRole;
@@ -54,16 +59,23 @@ public class ClientServiceImpl implements ClientService{
         if (form == null)
             return null;
 
-        if (!form.getDate_naiss().isBefore(LocalDate.now()) || Utilisateur.calculAge(form.getDate_naiss()) < 18)
-            throw new InvalidDateException("L'utilisateur doit être majeur");
+        if (!form.getDate_naiss().isBefore(LocalDateTime.now()) || Utilisateur.calculAge(form.getDate_naiss()) < 18)
+            throw new InvalidDateException("L'utilisateur doit être majeur!!");
 
-        if (repository.existsById(form.getId()))
-            throw new ElementAlreadyExistException();
+        try {
 
-        Client toInsert = mapper.formToEntity(form);
-        toInsert.setRoles(List.of(repRole.findById(2L).orElseThrow(ElementNotFoundException::new)));
+            uService.loadUserByUsername(form.getUsername()); //Si l'utilisateur n'existe pas => UsernameNotFoundException
+            throw new UsernameAlreadyExist();
 
-        return mapper.entityToDTO(repository.save(toInsert));
+        } catch (UsernameNotFoundException ex){
+            if (repository.existsById(form.getId()))
+                throw new ElementAlreadyExistException();
+
+            Client toInsert = mapper.formToEntity(form);
+            toInsert.setRoles(List.of(repRole.findById(2L).orElseThrow(ElementNotFoundException::new)));
+
+            return mapper.entityToDTO(repository.save(toInsert));
+        }
     }
 
     @Override

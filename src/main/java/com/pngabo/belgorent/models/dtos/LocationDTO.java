@@ -6,8 +6,7 @@ import com.pngabo.belgorent.models.TypeVoiture;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -15,8 +14,8 @@ public class LocationDTO {
     private long id_location;
     private String lieu_dep;
     private String lieu_arr;
-    private LocalDate date_debut;
-    private LocalDate date_fin;
+    private LocalDateTime date_debut;
+    private LocalDateTime date_fin;
     private ClientIntern client;
     private VoitureIntern voiture;
 
@@ -27,7 +26,7 @@ public class LocationDTO {
         private String nom;
         private String prenom;
         private String username;
-        private LocalDate date_naiss;
+        private LocalDateTime date_naiss;
     }
 
     @Data
@@ -39,8 +38,9 @@ public class LocationDTO {
         private Carburant carburant;
         private double kilometre;
         private boolean manuelle;
-        private TypeVoiture type;
+        private TypeVoiture typev;
         private EtatVoiture etat;
+        private String image;
         private String marque;
         private String modele;
     }

@@ -13,6 +13,7 @@ import com.pngabo.belgorent.repositories.LocationRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,7 +52,7 @@ public class LocationServiceImpl implements LocationService{
         if (lReposotory.existsById(form.getId_location()))
             throw new ElementAlreadyExistException();
 
-        if (!form.getDate_debut().isAfter(LocalDate.now()))
+        if (!form.getDate_debut().isAfter(LocalDateTime.now()))
             throw new InvalidDateException("La date de début de location doit être postérieur à la date du jour");
 
         if (!form.getDate_fin().isAfter(form.getDate_debut()))

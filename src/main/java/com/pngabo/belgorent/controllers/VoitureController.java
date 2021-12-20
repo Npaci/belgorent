@@ -73,6 +73,29 @@ public class VoitureController {
         return service.update(form);
     }
 
+    @PatchMapping(path = "/changestatus")
+    public VoitureDTO changeStatus(@Valid @RequestBody VoitureForm form) {
+        return service.changeStatus(form.getId_voiture(), getStatus(form.getEtat()));
+    }
+
+    private EtatVoiture getStatus(String value) {
+        if (value == null || value.equals(""))
+            return null;
+
+        switch (value) {
+            case "PRET":
+                return EtatVoiture.PRET;
+            case "LOUE":
+                return EtatVoiture.LOUE;
+            case "REPARATION":
+                return EtatVoiture.REPARATION;
+            case "PREPARATION":
+                return EtatVoiture.PREPARATION;
+            default:
+                return null;
+        }
+    }
+
     @DeleteMapping("/{id}")
     public VoitureDTO delete(@PathVariable Long id, Authentication auth) {
         //return service.deleteSecure(id, auth);

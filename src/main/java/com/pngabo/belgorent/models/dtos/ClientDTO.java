@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class ClientDTO {
     private String nom;
     private String prenom;
     private String username;
-    private LocalDate date_naiss;
+    private LocalDateTime date_naiss;
     private List<LocationIntern> locationInterns;
     private List<String> roles;
 
@@ -24,7 +25,7 @@ public class ClientDTO {
         private long id_location;
         private String lieu_dep;
         private String lieu_arr;
-        private LocalDate date_debut;
-        private LocalDate date_fin;
+        private LocalDateTime date_debut;
+        private LocalDateTime date_fin;
     }
 }

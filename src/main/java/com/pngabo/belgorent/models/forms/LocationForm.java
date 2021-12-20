@@ -10,6 +10,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -24,10 +25,10 @@ public class LocationForm {
     private String lieu_arr;
     @NotNull
     @Future
-    private LocalDate date_debut;
+    private LocalDateTime date_debut;
     @NotNull
     @Future
-    private LocalDate date_fin;
+    private LocalDateTime date_fin;
     @NotNull
     private Client client;
     @NotNull

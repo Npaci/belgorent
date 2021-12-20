@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,7 +67,7 @@ public abstract class Utilisateur implements UserDetails {
                 .collect(Collectors.toList());
     }
 
-    public static long calculAge(LocalDate bDay) {
+    public static long calculAge(LocalDateTime bDay) {
         LocalDate toDay = LocalDate.now();
 
         if (bDay != null){

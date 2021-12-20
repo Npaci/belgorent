@@ -27,7 +27,7 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
                         .nomMarque( voiture.getModele().getMarque() != null ? voiture.getModele().getMarque().getNom() : "" )
                         .build())
                 .prix(voiture.getPrix())
-                .type(voiture.getType());
+                .typev(voiture.getType());
 
         if (voiture.getImage() != null)
             builder.image(voiture.getImage());

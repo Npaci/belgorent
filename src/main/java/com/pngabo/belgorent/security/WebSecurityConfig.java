@@ -40,8 +40,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable();
 
         http.authorizeRequests()
-//                .antMatchers(HttpMethod.GET, "/voiture/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
+                .antMatchers(HttpMethod.POST, "/marque/**").hasAuthority("ADMIN")
+//                .antMatchers(HttpMethod.GET, "/marque/**").hasAuthority("ADMIN")//Pas besoin d'etre connecté pour demander des marques
+                .antMatchers(HttpMethod.PATCH, "/marque/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/marque/**").hasAuthority("ADMIN")
+
+//                .antMatchers(HttpMethod.POST, "/voiture/**").hasAuthority("ADMIN")
+//                .antMatchers(HttpMethod.POST, "/voiture/filtre/**").permitAll()
+
+//                .antMatchers(HttpMethod.GET, "/voiture/**").hasAuthority("ADMIN")//Pas besoin d'etre connecté pour demander des voiture
+                .antMatchers(HttpMethod.PATCH, "/voiture/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/voiture/**").hasAuthority("ADMIN")
+
+                .antMatchers(HttpMethod.POST, "/location/**").hasAuthority("USER")
+                .antMatchers(HttpMethod.GET, "/location/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/location/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/location/**").hasAuthority("ADMIN")
+
+//                .antMatchers(HttpMethod.POST, "/client/**").hasAuthority("USER")//Pas besoin d'etre connecter pour créer un user
+                .antMatchers(HttpMethod.GET, "/client/**").hasAuthority("ADMIN")//Pour l'instant
+                .antMatchers(HttpMethod.PATCH, "/client/**").hasAuthority("ADMIN")//Pour l'instant
+                .antMatchers(HttpMethod.DELETE, "/client/**").hasAuthority("ADMIN")//Pour l'instant
+
+                .antMatchers(HttpMethod.POST, "/admin/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/admin/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/admin/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/admin/**").hasAuthority("ADMIN")
+
+
                 .anyRequest().permitAll();
 
         http.addFilterBefore(new JwtAuthorizationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
