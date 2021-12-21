@@ -36,12 +36,13 @@ public class ClientMapper implements Mapper<Client, ClientDTO, ClientForm> {
             builder.locationInterns(entity.getListLocations().stream()
                     .map((elm) -> {
                         return ClientDTO.LocationIntern.builder()
-                            .id_location(elm.getId_location())
-                            .date_debut(elm.getDate_debut())
-                            .date_fin(elm.getDate_fin())
-                            .lieu_dep(elm.getLieu_dep())
-                            .lieu_arr(elm.getLieu_arr())
-                            .build();
+                                .id_location(elm.getId_location())
+                                .date_debut(elm.getDate_debut())
+                                .date_fin(elm.getDate_fin())
+                                .lieu_dep(elm.getLieu_dep())
+                                .lieu_arr(elm.getLieu_arr())
+                                .etat(elm.getEtat())
+                                .build();
                     })
                     .collect(Collectors.toList()));
 

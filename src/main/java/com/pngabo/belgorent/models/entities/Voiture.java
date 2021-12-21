@@ -4,6 +4,7 @@ import com.pngabo.belgorent.models.Carburant;
 import com.pngabo.belgorent.models.EtatVoiture;
 import com.pngabo.belgorent.models.TypeVoiture;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 

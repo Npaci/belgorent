@@ -17,6 +17,7 @@ public class OptionDTO {
     @Builder
     public static class VoitureIntern {
         private long id_voiture;
+        private String VIN;
         private double prix;
         private String couleur;
         private String carburant;

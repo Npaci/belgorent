@@ -1,8 +1,6 @@
 package com.pngabo.belgorent.services;
 
-import com.pngabo.belgorent.exceptions.ElementAlreadyExistException;
-import com.pngabo.belgorent.exceptions.ElementNotFoundException;
-import com.pngabo.belgorent.exceptions.ImageTooLargeException;
+import com.pngabo.belgorent.exceptions.*;
 import com.pngabo.belgorent.models.EtatVoiture;
 import com.pngabo.belgorent.models.dtos.VoitureDTO;
 import com.pngabo.belgorent.models.entities.Voiture;
@@ -10,6 +8,7 @@ import com.pngabo.belgorent.models.forms.FilterForm;
 import com.pngabo.belgorent.models.forms.VoitureForm;
 import com.pngabo.belgorent.models.mappers.VoitureMapper;
 import com.pngabo.belgorent.repositories.VoitureRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;

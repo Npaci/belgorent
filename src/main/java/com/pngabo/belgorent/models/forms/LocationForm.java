@@ -29,6 +29,8 @@ public class LocationForm {
     @NotNull
     @Future
     private LocalDateTime date_fin;
+    @NotBlank
+    private String etat;
     @NotNull
     private Client client;
     @NotNull

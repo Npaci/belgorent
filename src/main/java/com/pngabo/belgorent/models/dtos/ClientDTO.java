@@ -1,5 +1,7 @@
 package com.pngabo.belgorent.models.dtos;
 
+import com.pngabo.belgorent.models.EtatLocation;
+import com.pngabo.belgorent.models.EtatVoiture;
 import lombok.Builder;
 import lombok.Data;
 
@@ -27,5 +29,6 @@ public class ClientDTO {
         private String lieu_arr;
         private LocalDateTime date_debut;
         private LocalDateTime date_fin;
+        private EtatLocation etat;
     }
 }

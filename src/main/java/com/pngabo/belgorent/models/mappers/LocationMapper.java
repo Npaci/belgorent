@@ -1,5 +1,6 @@
 package com.pngabo.belgorent.models.mappers;
 
+import com.pngabo.belgorent.models.EtatLocation;
 import com.pngabo.belgorent.models.dtos.LocationDTO;
 import com.pngabo.belgorent.models.entities.Client;
 import com.pngabo.belgorent.models.entities.Location;
@@ -19,6 +20,7 @@ public class LocationMapper implements Mapper<Location, LocationDTO, LocationFor
                 .date_fin(entity.getDate_fin())
                 .lieu_dep(entity.getLieu_dep())
                 .lieu_arr(entity.getLieu_arr())
+                .etat(entity.getEtat())
                 .client(LocationDTO.ClientIntern.builder()
                         .id_client(c.getId())
                         .nom(c.getNom())
@@ -50,6 +52,7 @@ public class LocationMapper implements Mapper<Location, LocationDTO, LocationFor
                 .date_fin(form.getDate_fin())
                 .lieu_dep(form.getLieu_dep())
                 .lieu_arr(form.getLieu_arr())
+                .etat(EtatLocation.valueOf(form.getEtat()))
                 .client(form.getClient())
                 .voiture(form.getVoiture())
                 .build();

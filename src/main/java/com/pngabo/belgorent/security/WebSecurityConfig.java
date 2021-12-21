@@ -46,10 +46,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PATCH, "/marque/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/marque/**").hasAuthority("ADMIN")
 
-//                .antMatchers(HttpMethod.POST, "/voiture/**").hasAuthority("ADMIN")
-//                .antMatchers(HttpMethod.POST, "/voiture/filtre/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/modele/**").hasAuthority("ADMIN")
+//                .antMatchers(HttpMethod.GET, "/modele/**").hasAuthority("ADMIN")//Pas besoin d'etre connecté pour demander des modeles
+                .antMatchers(HttpMethod.PATCH, "/modele/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/modele/**").hasAuthority("ADMIN")
 
-//                .antMatchers(HttpMethod.GET, "/voiture/**").hasAuthority("ADMIN")//Pas besoin d'etre connecté pour demander des voiture
+                .antMatchers(HttpMethod.POST, "/voiture/filter").permitAll()
+                .antMatchers(HttpMethod.POST, "/voiture/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/voiture/colors").permitAll()
+                .antMatchers(HttpMethod.GET, "/voiture/fuels").permitAll()
+                .antMatchers(HttpMethod.GET, "/voiture/types").permitAll()
+                .antMatchers(HttpMethod.GET, "/voiture/ready").hasAuthority("USER")
+                .antMatchers(HttpMethod.GET, "/voiture/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/voiture/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/voiture/**").hasAuthority("ADMIN")
 

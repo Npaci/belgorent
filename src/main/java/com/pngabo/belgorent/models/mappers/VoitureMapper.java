@@ -41,6 +41,7 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
                             .date_fin(loc.getDate_fin())
                             .lieu_dep(loc.getLieu_dep())
                             .lieu_arr(loc.getLieu_arr())
+                            .etat(loc.getEtat())
                             .build();
                 })
                 .collect(Collectors.toList()));
@@ -64,7 +65,6 @@ public class VoitureMapper implements Mapper<Voiture, VoitureDTO, VoitureForm> {
     public Voiture formToEntity(VoitureForm form) {
         return Voiture.builder()
                 .id_voiture(form.getId_voiture())
-//                .modele_id(form.getModele_id())
                 .carburant(form.getCarburant())
                 .couleur(form.getCouleur())
                 .etat(EtatVoiture.valueOf(form.getEtat()))

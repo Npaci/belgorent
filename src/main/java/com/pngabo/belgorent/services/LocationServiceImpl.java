@@ -3,16 +3,15 @@ package com.pngabo.belgorent.services;
 import com.pngabo.belgorent.exceptions.ElementAlreadyExistException;
 import com.pngabo.belgorent.exceptions.ElementNotFoundException;
 import com.pngabo.belgorent.exceptions.InvalidDateException;
+import com.pngabo.belgorent.models.EtatLocation;
 import com.pngabo.belgorent.models.EtatVoiture;
 import com.pngabo.belgorent.models.dtos.LocationDTO;
 import com.pngabo.belgorent.models.entities.Location;
-import com.pngabo.belgorent.models.entities.Utilisateur;
 import com.pngabo.belgorent.models.forms.LocationForm;
 import com.pngabo.belgorent.models.mappers.LocationMapper;
 import com.pngabo.belgorent.repositories.LocationRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +26,42 @@ public class LocationServiceImpl implements LocationService{
         this.lReposotory = lReposotory;
         this.mapper = mapper;
         this.vServ = vServ;
+    }
+
+    public void updateCurrentRentals() {
+        List<Location> listLocFut = lReposotory.getAllFutureRentals();
+        List<Location> listLocPres = lReposotory.getAllCurrentRentals();
+
+
+        for (Location loc : listLocFut) {
+            if (loc.getDate_debut().isBefore(LocalDateTime.now()) && loc.getDate_fin().isAfter(LocalDateTime.now())){
+                changeStatus(loc.getId_location(), EtatLocation.PRESENT);
+                vServ.changeStatus(loc.getVoiture().getId_voiture(), EtatVoiture.LOUE);
+            } else if (loc.getDate_fin().isBefore(LocalDateTime.now())) {
+                changeStatus(loc.getId_location(), EtatLocation.PAST);
+                vServ.changeStatus(loc.getVoiture().getId_voiture(), EtatVoiture.PREPARATION);
+            }
+        }
+
+        for (Location loc : listLocPres) {
+            if (loc.getDate_fin().isBefore(LocalDateTime.now())){
+                changeStatus(loc.getId_location(), EtatLocation.PAST);
+                vServ.changeStatus(loc.getVoiture().getId_voiture(), EtatVoiture.PREPARATION);
+            } else
+                vServ.changeStatus(loc.getVoiture().getId_voiture(), EtatVoiture.LOUE);
+        }
+
+    }
+
+    public LocationDTO changeStatus(long id, EtatLocation status) {
+        if (!lReposotory.existsById(id))
+            throw new ElementNotFoundException();
+
+        Location found = lReposotory.findById(id)
+                .orElseThrow(ElementNotFoundException::new);
+        found.setEtat(status);
+
+        return mapper.entityToDTO(lReposotory.save(found));
     }
 
     @Override
@@ -60,7 +95,7 @@ public class LocationServiceImpl implements LocationService{
 
         Location toInsert = mapper.formToEntity(form);
         Location inserted = lReposotory.save(toInsert);
-        vServ.changeStatus(toInsert.getVoiture().getId_voiture(), EtatVoiture.LOUE);
+//        vServ.changeStatus(toInsert.getVoiture().getId_voiture(), EtatVoiture.LOUE);
 
         return mapper.entityToDTO(inserted);
     }

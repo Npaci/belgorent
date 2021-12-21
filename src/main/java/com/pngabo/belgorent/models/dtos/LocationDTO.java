@@ -1,6 +1,7 @@
 package com.pngabo.belgorent.models.dtos;
 
 import com.pngabo.belgorent.models.Carburant;
+import com.pngabo.belgorent.models.EtatLocation;
 import com.pngabo.belgorent.models.EtatVoiture;
 import com.pngabo.belgorent.models.TypeVoiture;
 import lombok.Builder;
@@ -18,6 +19,7 @@ public class LocationDTO {
     private LocalDateTime date_fin;
     private ClientIntern client;
     private VoitureIntern voiture;
+    private EtatLocation etat;
 
     @Data
     @Builder

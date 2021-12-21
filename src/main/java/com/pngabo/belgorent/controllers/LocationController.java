@@ -35,13 +35,11 @@ public class LocationController {
 
     @PostMapping(path = {"", "/", "/add"})
     public LocationDTO insert(@Valid @RequestBody LocationForm form) {
-        //form.setPassword(encoder.encode(form.getPassword()));
         return service.insert(form);
     }
 
     @PatchMapping(path = {"", "/", "/update"})
     public LocationDTO update(@Valid @RequestBody LocationForm form) {
-        //form.setPassword(encoder.encode(form.getPassword()));
         return service.update(form);
     }
 

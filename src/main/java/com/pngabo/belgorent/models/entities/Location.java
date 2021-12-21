@@ -1,5 +1,7 @@
 package com.pngabo.belgorent.models.entities;
 
+import com.pngabo.belgorent.models.EtatLocation;
+import com.pngabo.belgorent.models.TypeVoiture;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,6 +23,8 @@ public class Location {
     private String lieu_arr;
     private LocalDateTime date_debut;
     private LocalDateTime date_fin;
+    @Enumerated(EnumType.STRING)
+    private EtatLocation etat;
 
     @ManyToOne
     @JoinColumn(name = "voiture_id")
